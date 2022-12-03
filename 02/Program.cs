@@ -35,7 +35,7 @@
         { "Z", Hand.SCISSORS },
       };
 
-      return input.Split("\r\n").Aggregate(0, (acc, a) =>
+      return input.Split("\n").Aggregate(0, (acc, a) =>
       {
         var players = a.Split(" ");
         Hand player1 = Player1HandLookup[players[0]];
@@ -54,7 +54,7 @@
         { "Z", Result.WIN },
       };
 
-      return input.Split("\r\n").Aggregate(0, (acc, a) =>
+      return input.Split("\n").Aggregate(0, (acc, a) =>
       {
         var players = a.Split(" ");
         Hand player1 = Player1HandLookup[players[0]];
