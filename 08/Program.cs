@@ -11,7 +11,6 @@
       TreeMap = input.Split("\n").Select((row) => row.ToCharArray().Select((a) => int.Parse(a.ToString())).ToList()).ToList();
       Width = TreeMap[0].Count;
       Height = TreeMap.Count;
-      Console.WriteLine($"{Width},{Height}");
     }
 
     public int Part1()
