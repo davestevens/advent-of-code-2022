@@ -51,18 +51,17 @@
 
     public int Part1()
     {
-      return FindPath(StartPosition, EndPosition);
+      Point[] startPositions = new [] { StartPosition };
+      return FindPath(startPositions, EndPosition);
     }
 
     public int Part2()
     {
-      return Map
-        .Where((m) => m.Value == (int)'a')
-        .Select((point) => FindPath(point.Key, EndPosition))
-        .Min();
+      Point[] startPositions = Map.Where((m) => m.Value == (int)'a').Select((point) => point.Key).ToArray();
+      return FindPath(startPositions, EndPosition);
     }
 
-    private int FindPath(Point start, Point end)
+    private int FindPath(Point[] startPositions, Point end)
     {
       Dictionary<Point, int> nodes = new Dictionary<Point, int>();
       for (var y = 0; y < Height; ++y) {
@@ -72,9 +71,12 @@
           nodes[new Point(x, y)] = int.MaxValue;
         }
       }
-      nodes[new Point(start.X, start.Y)] = 0;
+      foreach (var startPosition in startPositions)
+      {
+        nodes[new Point(startPosition.X, startPosition.Y)] = 0;
+      }
 
-      List<Point> unvisited = new List<Point>() { new Point(start.X, start.Y) };
+      List<Point> unvisited = new List<Point>(startPositions);
       HashSet<Point> visited = new HashSet<Point>();
 
       while (unvisited.Count > 0)
